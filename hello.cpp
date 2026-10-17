@@ -17,7 +17,7 @@ int main(){
     SetConsoleOutputCP(CP_UTF8);
     std::setlocale(LC_ALL, ".UTF-8");
     
-    int a[5] = {100,6,8,4,2};
+    int a[5] = {1,6,8,4,2};
     int b['Q'] = {2,3,4,5};
     int c[5] = {4,2,3,4,'C'};
 

@@ -19,46 +19,54 @@ int main(){
         {9,9,9,9,9,9,9,9,9,9}
     };
     
-    const int dr[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
-    const int dc[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+int resultI[100];   
+int resultJ[100];   
+int resultVal[100]; 
+int count = 0;      
 
-    vector<tuple<int, int, int>> minima;
-    
-    for (int i=0; i<10; ++i){
-        for (int j=0; j<10; ++j){
-            bool isLocalMin = true;
 
-            for(int k=0; k<8; ++k){
-                int ni = i + dr[k];
-                int nj = j + dc[k];
+for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++) {
 
-                if (ni < 0 || ni >= 10 || nj < 0 || nj >= 10) continue;
+        bool isMin = true; 
+        for (int di = -1; di <= 1; di++) {
+            for (int dj = -1; dj <= 1; dj++) {
+                if (di == 0 && dj == 0) continue; 
 
-                if (matrix[ni][nj] <= matrix[i][j]) {
-                    isLocalMin = false;
-                    break;
+                int ni = i + di;
+                int nj = j + dj;
+                if (ni >= 0 && ni < 10 && nj >= 0 && nj < 10) {
+                    if (matrix[ni][nj] <= matrix[i][j]) {
+                        isMin = false;
+                        break; 
+                    }
                 }
             }
-
-            if (isLocalMin)
-            minima.push_back(make_tuple(i, j, matrix[i][j]));
+            if (!isMin) break; 
+        }
+        if (isMin) {
+            resultI[count] = i;
+            resultJ[count] = j;
+            resultVal[count] = matrix[i][j];
+            count++;
         }
     }
+}
 
-    cout << "Найдено локальных минимумов: " << minima.size() << '\n';
-    if (minima.empty()) {
-        cout << "ЛЩкальных минимумов нет.\n";
-        return 0;
+cout << "Найдено локальных минимумов: " << count << '\n';
+
+if (count == 0) {
+    cout << "Таких точек нет.\n";
+} else {
+    cout << "№ | Строка | Столбец | Значение\n";
+    cout << "--+--------+---------+---------\n";
+    for (int k = 0; k < count; k++) {
+        cout << k + 1 << " |   (" << resultI[k] 
+             << "    |    " << resultJ[k] 
+             << ")    |    " << resultVal[k] << "\n";
     }
+}
 
-    cout << " №  |  i (строка)  |  j (столбец)  |  значение \n";
-    int num = 1;
-    for (auto &m : minima) {
-        int i, j, val;
-        tie(i, j, val) = m;
-        printf("%2d  |    (%2d    |    %2d )   |    %2d\n", num, i, j, val);
-        ++num;
-    }
-
+return 0;
     return 0;
 }

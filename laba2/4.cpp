@@ -5,7 +5,7 @@ using namespace std;
 int main(){
     setlocale(LC_ALL, ".UTF-8");
 
-    int n, k;
+    int n;
     cout << "Введите количество элементов: ";
     
     while (!(cin>>n) || n < 0) {
@@ -17,6 +17,7 @@ int main(){
     int a[1000];
     cout << "Введите " << n << " целых чисел: ";
     
+    int k;
     for (int i=0; i < n; ++i) cin >> a[i];
     cout << "Введите целое число k: ";
     cin >> k;

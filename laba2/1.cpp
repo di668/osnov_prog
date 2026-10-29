@@ -23,10 +23,18 @@ int main() {
         cin.ignore(1000, '\n');
         cout << "Ты дурак? Читать научись. ЧИСЛО. Ввoди: ";
         }
-    
     }
-
-    sort(arr.begin(), arr.end());
+    for ( int j = 0; j < size - 1; j++){
+        bool sort = false;
+        for (int j = 0; j < size - 1; j++){
+            if(arr[j] > arr[j+1]){
+                int tot = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = tot;
+                sort = true;
+            }
+        }
+    }
 
     cout << "Ваш отсортированный массив: ";
     for (int x : arr) cout << x << ' ';
